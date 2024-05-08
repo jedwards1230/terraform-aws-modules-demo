@@ -1,0 +1,6 @@
+.terraform*
+terraform.tfstate*
+terragrunt_rendered.json
+.terragrunt-cache
+.mypy_cache
+scrapyard/
