@@ -1,3 +1,3 @@
 locals {
-  deployment_name = "Terranut-stage"
+  deployment_name = "module-demo-stage"
 }

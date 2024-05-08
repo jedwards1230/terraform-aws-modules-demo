@@ -1,4 +1,4 @@
-# Terranut
+# terraform-aws-modules-demo 
 
 This repository contains the Terraform modules and Terragrunt configurations used to manage cloud infrastructure on AWS. 
 

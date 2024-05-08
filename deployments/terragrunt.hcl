@@ -6,11 +6,11 @@ remote_state {
   }
 
   config = {
-    bucket         = "terranut-terraform-state"
+    bucket         = "terraform-aws-modules-demo-terraform-state"
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "terranut-lock-table"
+    dynamodb_table = "terraform-aws-modules-demo-lock-table"
   }
 }
 
