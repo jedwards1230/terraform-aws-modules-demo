@@ -1,0 +1,16 @@
+# Terraform Docs Configuration File
+# https://terraform-docs.io/user-guide/configuration/
+
+formatter: "markdown table"
+
+output:
+    file: README.md
+    mode: replace
+    template: |-
+        {{ .Content }}
+
+recursive:
+    enabled: true
+    path: .
+
+header-from: main.tf

@@ -1,3 +1,9 @@
+/**
+ * # Kinesis Module
+ *
+ * AWS - Kinesis stream handler
+ */
+
 variable "stream_name" {
   type = string
 }

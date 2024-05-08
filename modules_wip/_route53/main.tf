@@ -1,3 +1,9 @@
+/**
+ * # Route53 Module
+ *
+ * AWS - Route53 domain management and DNS services.
+ */
+
 terraform {
   required_version = ">= 1.8"
 

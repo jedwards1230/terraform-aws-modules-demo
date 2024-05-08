@@ -1,3 +1,11 @@
+/**
+ * # CloudFront Module
+ *
+ * AWS - Cloudfront module (Handles Route53 and SSL certificate creation)
+ * 
+ * View an [example](../../deployments/dev/cloudfront/terragrunt.hcl)
+ */
+
 terraform {
   required_version = ">= 1.8"
 

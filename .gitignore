@@ -1,4 +1,4 @@
-.terraform*
+.terraform.lock*
 terraform.tfstate*
 terragrunt_rendered.json
 .terragrunt-cache

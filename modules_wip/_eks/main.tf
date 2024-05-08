@@ -1,3 +1,9 @@
+/**
+ * # Elastic Kubernetes Service (EKS) Module
+ *
+ * AWS - Elastic Kubernetes Service (EKS) cluster
+ */
+
 terraform {
   required_version = ">= 1.8"
 

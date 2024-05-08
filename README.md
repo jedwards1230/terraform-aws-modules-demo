@@ -8,10 +8,16 @@ Before you get started, ensure you have the following installed:
 - [Terraform](https://developer.hashicorp.com/terraform/install) (v1.8 or higher recommended).
 - [Terragrunt](https://terragrunt.gruntwork.io/docs/getting-started/install) (v0.58 or higher recommended).
 
+Development tools:
+- [Terraform-docs](https://terraform-docs.io/user-guide/installation/) (v0.17 or higher recommended).
+
 ## Repository Structure
 
-- **`/modules`**: This directory contains reusable Terraform modules, each specifying a part of the AWS cloud infrastructure.
 - **`/deployments`**: This directory contains Terragrunt configurations which reference the modules defined in `/modules` to deploy actual cloud resources.
+- **`/modules`**: This directory contains reusable Terraform modules, each specifying a part of the AWS cloud infrastructure.
+- **`/modules_wip`**: This directory contains work-in-progress Terraform modules that are not yet ready for production use.
+- **`/scripts`**: This directory contains scripts that can be used to automate tasks such as building Docker images and pushing them to ECR, or building documentation.
+- **`/containers`**: This directory contains Dockerfiles for building Docker images that can be deployed to ECS.
 
 ## Using Terragrunt
 
@@ -43,20 +49,35 @@ terragrunt catalog
 
 ### Available Modules
 
-| Provider | Module Name            | Description                                              |
-|----------|------------------------|----------------------------------------------------------|
-| AWS      | Kinesis                | Kinesis stream handler                                   |
-| AWS      | Application Load Balancer | Application Load Balancer (ALB) module                |
-| AWS      | CloudFront             | Cloudfront module (Handles Route53 and SSL certificate creation) |
-| AWS      | Elastic Container Service (ECS) | Orchestrates container deployments, ensuring they're running and managing interactions with other AWS services |
-| AWS      | Elastic Kubernetes Service (EKS) | Elastic Kubernetes Service (EKS) cluster            |
-| AWS      | Network                | Network resources (e.g., VPC, Subnets, etc.)             |
-| AWS      | Route53                | Route53 domain management and DNS services               |
+| Provider      | Module Name       | Description                                                                                                    |
+| ------------- | ----------------- | -------------------------------------------------------------------------------------------------------------- |
+| hashicorp/aws | app_load_balancer | Application Load Balancer (ALB) module                                                                         |
+| hashicorp/aws | cloudFront        | Cloudfront module (Handles Route53 and SSL certificate creation)                                               |
+| hashicorp/aws | ecs               | Orchestrates container deployments, ensuring they're running and managing interactions with other AWS services |
+| hashicorp/aws | network           | Network resources (e.g., VPC, Subnets, etc.)                                                                   |
 
+### Work-In-Progress Modules
+
+| Provider       | Module Name | Description                                |
+| -------------- | ----------- | ------------------------------------------ |
+| hashicorp/aws  | _eks        | Elastic Kubernetes Service (EKS) cluster   |
+| hashicorp/helm | _eks-addons | EKS Addons module                          |
+| hashicorp/aws  | _kinesis    | Kinesis stream handler                     |
+| hashicorp/aws  | _route53    | Route53 domain management and DNS services |
 
 ## Development
 
+### Build documentation
+
+To build the documentation, run the following command from the project root directory:
+
+```
+./scripts/build_docs.sh
+```
+
 ### Testing
+
+#### ECS Deployment
 
 This demo deploys a docker image to an ECS cluster. To test the deployment, run the following commands:
 
