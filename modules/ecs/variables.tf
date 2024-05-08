@@ -25,20 +25,18 @@ variable "task_config" {
 }
 
 variable "secrets" {
-  description = "Map of secret keys and their respective values"
-  type        = map(string)
-  sensitive   = true
-  default = {
-    "http_user" = ""
-    "http_pass" = ""
-  }
+  description = "List of secret objects"
+  type = list(object({
+    keyname      = string
+    secret_value = string
+  }))
+  default = null
 }
 
 variable "load_balancer_config" {
   description = "Load balancer configuration"
   type        = map(string)
   default = {
-    container_name   = "main"
     container_port   = 80
     target_group_arn = null
   }
@@ -46,8 +44,7 @@ variable "load_balancer_config" {
 }
 
 locals {
-  main_container     = "${var.deployment_name}-commandbox"
-  executor_role_name = "${var.deployment_name}-ecsTaskExecutionRole"
+  container_name = "${var.deployment_name}-main"
 
   common_tags = {
     awsApplication = var.deployment_name

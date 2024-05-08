@@ -13,8 +13,8 @@ resource "aws_ecs_task_definition" "main" {
 
   container_definitions = jsonencode([
     {
-      name      = local.main_container,
-      image     = aws_ecr_repository.main.repository_url,
+      name      = local.container_name,
+      image     = aws_ecr_repository.this.repository_url,
       essential = true,
       portMappings = [
         {
@@ -31,9 +31,9 @@ resource "aws_ecs_task_definition" "main" {
         }
       ],
       secrets = [
-        for key, secret in aws_secretsmanager_secret.this : {
-          name      = key
-          valueFrom = secret.arn
+        for secret_obj in var.secrets : {
+          name      = secret_obj.keyname
+          valueFrom = aws_secretsmanager_secret.this[lookup(secret_obj, "keyname")].arn
         }
       ],
       logConfiguration = {
@@ -49,6 +49,6 @@ resource "aws_ecs_task_definition" "main" {
 }
 
 resource "aws_cloudwatch_log_group" "log_group" {
-  name              = "/ecs/${local.main_container}"
+  name              = "/ecs/${local.container_name}"
   retention_in_days = 30 // Adjust the retention period as needed
 }

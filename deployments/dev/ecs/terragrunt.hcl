@@ -52,16 +52,24 @@ inputs = {
   region = "us-west-2"
 
   # Description: Secrets
-  # Type: map(string)
-  secrets = {
-    "http_user" = ""
-    "http_pass" = ""
-  }
+  # Type: list(object({
+  #   keyname      = string
+  #   secret_value = string
+  # }))
+  secrets = [
+    {
+      keyname = "key_1"
+      secret_value  = "hello"
+    },
+    {
+      keyname = "key_2",
+      secret_value  = "world"
+    }
+  ]
 
   # Description: Load balancer configuration
   # Type: map(string)
-  load_balancer = {
-    container_name   = "main"
+  load_balancer_config = {
     container_port   = 80
     target_group_arn = dependency.app_load_balancer.outputs.target_group_arn
   }

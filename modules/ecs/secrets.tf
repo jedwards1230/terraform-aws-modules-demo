@@ -1,17 +1,17 @@
 # Dynamically Create Secrets Manager entries and their versions
 resource "aws_secretsmanager_secret" "this" {
-  count = length(var.secrets)
+  for_each = { for s in var.secrets : s.keyname => s }
 
-  name        = "${var.deployment_name}-${keys(var.secrets)[count.index]}"
-  description = "Secret for ${keys(var.secrets)[count.index]}"
+  name        = "${var.deployment_name}-${each.key}"
+  description = "Secret for ${each.key}"
   tags        = local.common_tags
 }
 
 resource "aws_secretsmanager_secret_version" "this" {
-  count = length(var.secrets)
+  for_each = { for s in var.secrets : s.keyname => s }
 
-  secret_id     = aws_secretsmanager_secret.this[count.index].id
-  secret_string = values(var.secrets)[count.index]
+  secret_id     = aws_secretsmanager_secret.this[each.key].id
+  secret_string = each.value.secret_value
 }
 
 # Updated IAM policy to allow access to all secrets
@@ -40,7 +40,7 @@ resource "aws_iam_policy" "secrets_access" {
 # This role is used by ECS tasks to interact with other AWS services such as ECR for image pulling 
 # and CloudWatch for logging.
 resource "aws_iam_role" "task_executor" {
-  name = local.executor_role_name
+  name = "${var.deployment_name}-ecsTaskExecutionRole"
   tags = local.common_tags
 
   assume_role_policy = jsonencode({
