@@ -22,19 +22,14 @@ variable "public_subnets_cidr" {
 }
 
 variable "private_subnet_tags" {
-  type = map(any)
-  default = {
-    "kubernetes.io/role/internal-elb" = "1"
-    "kubernetes.io/cluster/dev-demo"  = "owned"
-  }
+  type        = map(any)
+  default     = {}
   description = "value for the private subnets tags"
 }
 
 variable "public_subnet_tags" {
   type = map(any)
   default = {
-    "kubernetes.io/role/elb"         = "1"
-    "kubernetes.io/cluster/dev-demo" = "owned"
   }
   description = "value for the public subnets tags"
 }

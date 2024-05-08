@@ -43,9 +43,9 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_env"></a> [env](#input\_env) | value for the environment | `string` | n/a | yes |
-| <a name="input_private_subnet_tags"></a> [private\_subnet\_tags](#input\_private\_subnet\_tags) | value for the private subnets tags | `map(any)` | <pre>{<br>  "kubernetes.io/cluster/dev-demo": "owned",<br>  "kubernetes.io/role/internal-elb": "1"<br>}</pre> | no |
+| <a name="input_private_subnet_tags"></a> [private\_subnet\_tags](#input\_private\_subnet\_tags) | value for the private subnets tags | `map(any)` | `{}` | no |
 | <a name="input_private_subnets_cidr"></a> [private\_subnets\_cidr](#input\_private\_subnets\_cidr) | value for the private subnets CIDR blocks | `list(string)` | <pre>[<br>  "10.0.0.0/19",<br>  "10.0.32.0/19"<br>]</pre> | no |
-| <a name="input_public_subnet_tags"></a> [public\_subnet\_tags](#input\_public\_subnet\_tags) | value for the public subnets tags | `map(any)` | <pre>{<br>  "kubernetes.io/cluster/dev-demo": "owned",<br>  "kubernetes.io/role/elb": "1"<br>}</pre> | no |
+| <a name="input_public_subnet_tags"></a> [public\_subnet\_tags](#input\_public\_subnet\_tags) | value for the public subnets tags | `map(any)` | `{}` | no |
 | <a name="input_public_subnets_cidr"></a> [public\_subnets\_cidr](#input\_public\_subnets\_cidr) | value for the public subnets CIDR blocks | `list(string)` | <pre>[<br>  "10.0.64.0/19",<br>  "10.0.96.0/19"<br>]</pre> | no |
 | <a name="input_subnet_availability_zones"></a> [subnet\_availability\_zones](#input\_subnet\_availability\_zones) | value for the subnet availability zones | `list(string)` | <pre>[<br>  "us-east-1a",<br>  "us-east-1b"<br>]</pre> | no |
 | <a name="input_vpc_cidr_block"></a> [vpc\_cidr\_block](#input\_vpc\_cidr\_block) | value for the vpc cidr block | `string` | `"10.0.0.0/16"` | no |

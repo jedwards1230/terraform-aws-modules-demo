@@ -1,8 +1,9 @@
 # Amazon Elastic Container Registry (ECR) Setup
 # Stores Docker images used by ECS to launch containers.
 resource "aws_ecr_repository" "this" {
-  name = lower(var.deployment_name) # ECR repository name must be lowercase
-  tags = local.common_tags
+  name         = lower(var.deployment_name) # ECR repository name must be lowercase
+  force_delete = var.force_delete_ecr
+  tags         = local.common_tags
 }
 
 resource "aws_ecr_lifecycle_policy" "this" {

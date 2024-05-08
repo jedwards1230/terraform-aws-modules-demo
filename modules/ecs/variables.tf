@@ -35,12 +35,26 @@ variable "secrets" {
 
 variable "load_balancer_config" {
   description = "Load balancer configuration"
-  type        = map(string)
+  type = object({
+    container_port   = number
+    target_group_arn = string
+  })
   default = {
-    container_port   = 80
+    container_port   = 3000
     target_group_arn = null
   }
+}
 
+variable "force_delete_ecr" {
+  description = "Force delete ECR repository"
+  type        = bool
+  default     = true
+}
+
+variable "secret_recovery_window_in_days" {
+  description = "Secret recovery window in days (Set to 0 for immediate deletion)"
+  type        = number
+  default     = 0
 }
 
 locals {

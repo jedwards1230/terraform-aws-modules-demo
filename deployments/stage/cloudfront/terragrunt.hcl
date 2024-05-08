@@ -20,6 +20,20 @@ dependency "app_load_balancer" {
   }
 }
 
+# Prefix list
+# A prefix list is a collection of CIDR blocks that are associated with a name.
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ec2_managed_prefix_list
+/* generate "prefix_list" {
+  path      = "prefix_list.tf"
+  if_exists = "overwrite_terragrunt"
+
+  contents = <<EOF
+data "aws_ec2_managed_prefix_list" "this" {
+  name = "com.amazonaws.global.cloudfront.origin-facing"
+}
+EOF
+} */
+
 inputs = {
   # --------------------------------------------------------------------------------------------------------------------
   # Required input variables
@@ -37,5 +51,14 @@ inputs = {
   # Optional input variables
   # Uncomment the ones you wish to set
   # --------------------------------------------------------------------------------------------------------------------
+
+  # Description: The origin configuration
+  # Type: map
+  # origin_config = {
+  #   "http_port" : 80,
+  #   "https_port" : 443,
+  #   "origin_protocol_policy" : "match-viewer",
+  #   "origin_ssl_protocols" : "TLSv1.2"
+  # }
 
 }

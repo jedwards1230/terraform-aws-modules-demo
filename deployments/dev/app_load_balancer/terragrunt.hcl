@@ -39,7 +39,18 @@ inputs = {
   # Type: list(string)
   subnet_ids = dependency.vpc.outputs.public_subnet_ids
 
-  # Description: The ID of the security group
+  # Description: value for the security group ids
   # Type: string
   security_group_ids = [dependency.vpc.outputs.security_group_id]
+
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Optional input variables
+  # Uncomment the ones you wish to set
+  # --------------------------------------------------------------------------------------------------------------------
+
+  # Description: The port the container listens on
+  # Type: number
+  # target_port = 3000
+
 }

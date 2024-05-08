@@ -16,6 +16,12 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
+variable "target_port" {
+  description = "The port the container listens on"
+  type        = number
+  default     = 3000
+}
+
 locals {
   common_tags = {
     awsApplication = var.deployment_name

@@ -18,6 +18,7 @@ dependency "vpc" {
   mock_outputs = {
     public_subnet_ids = ["subnet-12345678", "subnet-87654321"]
     vpc_id            = "vpc-12345678"
+    security_group_id = "sg-12345678"
   }
 }
 
@@ -37,4 +38,19 @@ inputs = {
   # Description: value for the subnet ids
   # Type: list(string)
   subnet_ids = dependency.vpc.outputs.public_subnet_ids
+
+  # Description: value for the security group ids
+  # Type: string
+  security_group_ids = [dependency.vpc.outputs.security_group_id]
+
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Optional input variables
+  # Uncomment the ones you wish to set
+  # --------------------------------------------------------------------------------------------------------------------
+
+  # Description: The port the container listens on
+  # Type: number
+  # target_port = 3000
+
 }

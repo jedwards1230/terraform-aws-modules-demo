@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "main" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.task_config.cpu
   memory                   = var.task_config.memory
-  execution_role_arn       = aws_iam_role.task_executor.arn
+  execution_role_arn       = aws_iam_role.this.arn
   tags                     = local.common_tags
 
   container_definitions = jsonencode([
@@ -18,14 +18,8 @@ resource "aws_ecs_task_definition" "main" {
       essential = true,
       portMappings = [
         {
-          containerPort = 80,
-          hostPort      = 80,
-          protocol      = "tcp"
-          appProtocol   = "http"
-        },
-        {
-          containerPort = 443,
-          hostPort      = 443,
+          containerPort = var.load_balancer_config.container_port,
+          hostPort      = var.load_balancer_config.container_port,
           protocol      = "tcp"
           appProtocol   = "http"
         }
@@ -39,6 +33,7 @@ resource "aws_ecs_task_definition" "main" {
       logConfiguration = {
         logDriver = "awslogs",
         options = {
+          "awslogs-create-group"  = "true",
           "awslogs-group"         = aws_cloudwatch_log_group.log_group.name,
           "awslogs-region"        = var.region,
           "awslogs-stream-prefix" = "ecs",
@@ -50,5 +45,5 @@ resource "aws_ecs_task_definition" "main" {
 
 resource "aws_cloudwatch_log_group" "log_group" {
   name              = "/ecs/${local.container_name}"
-  retention_in_days = 30 // Adjust the retention period as needed
+  retention_in_days = 30
 }

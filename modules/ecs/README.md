@@ -32,7 +32,7 @@ No modules.
 | [aws_ecs_service.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service) | resource |
 | [aws_ecs_task_definition.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition) | resource |
 | [aws_iam_policy.secrets_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_role.task_executor](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.ecs_task_execution](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.secrets_access_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_secretsmanager_secret.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
@@ -43,8 +43,10 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_deployment_name"></a> [deployment\_name](#input\_deployment\_name) | Deployment name (Project name + Environment) | `string` | n/a | yes |
-| <a name="input_load_balancer_config"></a> [load\_balancer\_config](#input\_load\_balancer\_config) | Load balancer configuration | `map(string)` | <pre>{<br>  "container_port": 80,<br>  "target_group_arn": null<br>}</pre> | no |
+| <a name="input_force_delete_ecr"></a> [force\_delete\_ecr](#input\_force\_delete\_ecr) | Force delete ECR repository | `bool` | `true` | no |
+| <a name="input_load_balancer_config"></a> [load\_balancer\_config](#input\_load\_balancer\_config) | Load balancer configuration | <pre>object({<br>    container_port   = number<br>    target_group_arn = string<br>  })</pre> | <pre>{<br>  "container_port": 3000,<br>  "target_group_arn": null<br>}</pre> | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS region | `string` | n/a | yes |
+| <a name="input_secret_recovery_window_in_days"></a> [secret\_recovery\_window\_in\_days](#input\_secret\_recovery\_window\_in\_days) | Secret recovery window in days (Set to 0 for immediate deletion) | `number` | `0` | no |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | List of secret objects | <pre>list(object({<br>    keyname      = string<br>    secret_value = string<br>  }))</pre> | `null` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | value for the security group ids | `list(string)` | n/a | yes |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | value for the subnet ids | `list(string)` | n/a | yes |
