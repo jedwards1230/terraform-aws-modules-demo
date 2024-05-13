@@ -15,7 +15,7 @@ Development tools:
 
 - **`/deployments`**: This directory contains Terragrunt configurations which reference the modules defined in `/modules` to deploy actual cloud resources.
 - **`/modules`**: This directory contains reusable Terraform modules, each specifying a part of the AWS cloud infrastructure.
-- **`/modules_wip`**: This directory contains work-in-progress Terraform modules that are not yet ready for production use.
+- **`/modules_wip`**: This directory contains work-in-progress Terraform modules that are not yet ready for production use. (They probably don't run as-is)
 - **`/scripts`**: This directory contains scripts that can be used to automate tasks such as building Docker images and pushing them to ECR, or building documentation.
 - **`/containers`**: This directory contains Dockerfiles for building Docker images that can be deployed to ECS.
 
